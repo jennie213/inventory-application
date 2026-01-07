@@ -1,0 +1,28 @@
+# ---------------------------
+# Node / React
+# ---------------------------
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# ---------------------------
+# Java / Spring Boot
+# ---------------------------
+backend/target/
+backend/.idea/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.env
+
+# ---------------------------
+# Eclipse workspace
+# ---------------------------
+/InventoryProject/.metadata/
+*.log
+
+# ---------------------------
+# OS / Misc
+# ---------------------------
+.DS_Store
+Thumbs.db
