@@ -1,0 +1,143 @@
+/* ====== Global Background ====== */
+body {
+  background:
+    linear-gradient(to right, rgba(30, 60, 114, 0.55), rgba(42, 135, 152, 0.55)),
+    url('https://plus.unsplash.com/premium_photo-1681426710520-7c56c9f563d2?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW52ZW50b3J5JTIwbWFuYWdlbWVudHxlbnwwfHwwfHx8MA%3D%3D')
+      no-repeat center center / cover;
+  background-size: cover;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* ====== Form Container Card ====== */
+.display-card {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 30px 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ====== Form Title ====== */
+.display-card h2 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #14374b;
+}
+
+/* ====== Input Fields ====== */
+.display-card .form-control {
+  border-radius: 8px;
+  border: 1px solid #cfd8dc;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.display-card .form-control:focus {
+  border-color: #1e3c72;
+  box-shadow: 0 0 5px rgba(30, 60, 114, 0.3);
+}
+
+/* ====== Labels ====== */
+.display-card label {
+  font-weight: 500;
+  color: #37474f;
+  margin-top: 10px;
+}
+
+/* ====== Submit Button ====== */
+.display-card button {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 0;
+  margin-top: 15px;
+}
+
+/* ====== Error Message ====== */
+.error-text {
+  color: #d32f2f;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+/* ====== Animation ====== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.glass-box {
+  background: rgba(255, 255, 255, 0.434);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.703) !important;
+  border: 1px solid rgba(255,255,255,0.8) !important;
+  transition: 0.2s;
+}
+
+.glass-input:focus {
+  background: rgba(255,255,255,0.85) !important;
+  box-shadow: 0 0 6px #0d6efd;
+  border: 1px solid #0d6efd !important;
+}
+
+.login-bg {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent !important;
+}
+
+.admin-menu-card {
+  border-radius: 16px;
+}
+
+.menu-item-card {
+  border-radius: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.menu-item-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-report-wrapper {
+    padding: 20px;
+}
+
+.product-report-header {
+    background: linear-gradient(to right, #c6c1c1, #9fd9e4);
+
+    padding: 14px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.product-report-header h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    color: #333;
+}
