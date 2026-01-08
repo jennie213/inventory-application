@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { getProductById, editProductStock } from '../../Services/ProductService';
+import { getProductById, updateProduct } from '../../Services/ProductService';
 import { getUserId } from '../../Services/LoginService';
 import { transactionIdGenerate, saveTransaction } from '../../Services/TransactionService';
 
@@ -23,9 +23,6 @@ const ProductStockEdit = () => {
     const [errors, setErrors] = useState({});
     const [warns, setWarns] = useState(null);
     const [tdate, setTdate] = useState(new Date());
-    // const [tdate, setTdate] = useState(
-    // new Date().toISOString().split("T")[0]
-    // );
 
     const [transaction, setTransaction] = useState({
         transactionId: 0,
@@ -35,7 +32,6 @@ const ProductStockEdit = () => {
         quantity: 0.0,
         transactionValue: 0.0,
         userId: "",
-        // transactionDate: new Date(),
         transactionDate: "",
     });
 
@@ -83,84 +79,48 @@ const ProductStockEdit = () => {
         setQuantity(0.0);
     }
 
-    // const stockEdit = (e) => {
-    //     e.preventDefault();
-    //     transaction.transactionId = newId;
-    //     transaction.productId = product.productId;
-    //     transaction.quantity = quantity;
-    //     transaction.userId = userId;
-    //     transaction.transactionDate = tdate;
-    //     if (flag === "1") {
-    //         transaction.transactionType = "IN";
-    //         transaction.rate = product.purchasePrice;
-    //     } else if (flag === "2") {
-    //         transaction.transactionType = "OUT";
-    //         transaction.rate = product.salesPrice;
-    //     }
-    //     transaction.transactionValue = parseFloat(transaction.rate) * parseFloat(quantity);
-    //     setTransValue(transaction.transactionValue);
-    //     if (flag === "2") {
-    //         let balance = product.stock - quantity;
-    //         if (balance <= product.reorderLevel)
-    //             setWarns("Warning: Stock reached the reorder level!...");
-    //     }
-    //     saveTransaction(transaction).then((response) => {
-    //         setTransaction(response.data);
-    //         returnBack();
-    //     });
-
-    //     editProductStock(product, quantity, flag).then((response) => {
-    //         setProduct(response.data);
-    //         setFlag("");
-    //         clearAll();
-    //     });
-    // }
-   
    const stockEdit = async (e) => {
   e.preventDefault();
 
-  if (!userId) {
-    alert("User not ready yet. Try again.");
-    return;
-  }
+  const qty = parseFloat(quantity);
+
+  const updatedStock =
+    flag === "1"
+      ? product.stock + qty
+      : product.stock - qty;
+
+  const updatedProduct = {
+    ...product,
+    stock: updatedStock
+  };
+
+  const transactionValue =
+    qty * (flag === "1" ? product.purchasePrice : product.salesPrice);
 
   const transactionToSave = {
     transactionId: newId,
     transactionType: flag === "1" ? "IN" : "OUT",
     productId: product.productId,
     rate: flag === "1" ? product.purchasePrice : product.salesPrice,
-    quantity: parseFloat(quantity),
-    transactionValue:
-      parseFloat(quantity) *
-      (flag === "1" ? product.purchasePrice : product.salesPrice),
+    quantity: qty,
+    transactionValue: transactionValue,
     userId: userId,
     transactionDate: tdate
   };
 
-  setTransValue(transactionToSave.transactionValue);
-
-  if (flag === "2") {
-    const balance = product.stock - parseFloat(quantity);
-    if (balance <= product.reorderLevel) {
-      setWarns("Warning: Stock reached the reorder level!...");
-    }
-  }
-
   try {
-    await saveTransaction(transactionToSave);   
+    await updateProduct(updatedProduct);
+    await saveTransaction(transactionToSave);
+    setTransValue(transactionValue);
 
-    const updatedProduct = await editProductStock(product, quantity, flag);
-    setProduct(updatedProduct.data);
-    setFlag("");
-    clearAll();
-    returnBack();
+    setTimeout(() => {
+      clearAll();
+      returnBack();
+    }, 1500);
   } catch (err) {
-    console.error("Error saving transaction:", err);
-    
+    console.error(err);
   }
 };
-
-
 
     const handleValidation = (e) => {
         e.preventDefault();
